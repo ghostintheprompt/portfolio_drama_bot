@@ -1,0 +1,39 @@
+# Environment
+.env
+.env.local
+
+# Wallets (CRITICAL - Never commit!)
+wallets.json
+*.wallet
+
+# Results
+simulation-results.json
+launch-results.json
+STOP
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build
+dist/
+build/
+*.dmg
+*.app
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log

@@ -1,0 +1,408 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  margin-bottom: 20px;
+  color: #667eea;
+  font-size: 1.5em;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 0.9em;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group.checkbox input {
+  width: auto;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: #333;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.action-card {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+}
+
+.action-card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.action-card p {
+  margin-bottom: 15px;
+  color: #666;
+  font-size: 0.95em;
+}
+
+.action-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+.action-card button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.wallet-list {
+  display: grid;
+  gap: 15px;
+}
+
+.wallet-item {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.wallet-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.wallet-purpose {
+  font-size: 0.9em;
+  color: #666;
+  background: #e9ecef;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.wallet-address {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.wallet-balance {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.balance-amount {
+  color: #28a745;
+}
+
+.status-ok {
+  color: #28a745;
+}
+
+.status-warn {
+  color: #ffc107;
+  font-size: 0.9em;
+}
+
+.status-log {
+  max-height: 400px;
+  overflow-y: auto;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.log-entry {
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.log-time {
+  opacity: 0.7;
+  margin-right: 10px;
+}
+
+.log-info {
+  color: #17a2b8;
+}
+
+.log-success {
+  color: #28a745;
+}
+
+.log-warning {
+  color: #ffc107;
+}
+
+.log-error {
+  color: #dc3545;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.result-card {
+  padding: 15px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+}
+
+.result-card h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.stat-value.good {
+  color: #28a745;
+}
+
+.stat-value.ok {
+  color: #ffc107;
+}
+
+.stat-value.bad {
+  color: #dc3545;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 10px;
+}
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 120px 100px 100px 1fr;
+  gap: 15px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  align-items: center;
+}
+
+.schedule-time {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.schedule-status {
+  text-align: right;
+}
+
+.trade-history {
+  margin-top: 20px;
+}
+
+.trade-item {
+  display: grid;
+  grid-template-columns: 120px 100px 100px 1fr;
+  gap: 15px;
+  padding: 10px;
+  background: #e9ecef;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.trade-time {
+  font-weight: 600;
+}
+
+.trade-tx {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.text-muted {
+  color: #888;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+}
