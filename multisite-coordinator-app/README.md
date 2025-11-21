@@ -364,9 +364,15 @@ For issues or questions:
 
 ## Additional Documentation
 
+### Technical Guides
 - **QUICKSTART.md** - 5-minute setup guide
 - **MARKET_MAKER_GUIDE.md** - Complete Market Maker Bot documentation
 - **AUTOMATED_LAUNCH_SYSTEM.md** - Original technical specification
+
+### Strategic Guides
+- **TOKENOMICS_STRATEGY.md** - Demand creation and speculation economics
+- **WALLET_OPSEC_GUIDE.md** - Privacy and wallet management best practices
+- **CRYPTO_LIQUIDITY_STRATEGY.md** - Liquidity bootstrapping strategies
 
 ## Disclaimer
 
