@@ -14,8 +14,26 @@
       <p class="subtitle">Personal Multi-Wallet Liquidity Manager</p>
     </header>
 
+    <!-- Mode Selector -->
+    <div class="mode-selector">
+      <button class="mode-btn active" onclick="switchMode('coordinator')" id="mode-coordinator">
+        🚀 Launch Coordinator
+        <small>One-time liquidity event</small>
+      </button>
+      <button class="mode-btn" onclick="switchMode('market-maker')" id="mode-market-maker">
+        🤖 Market Maker Bot
+        <small>Continuous 24/7 trading</small>
+      </button>
+      <button class="mode-btn" onclick="switchMode('hybrid')" id="mode-hybrid">
+        ⚡ Hybrid Mode
+        <small>Both strategies combined</small>
+      </button>
+    </div>
+
     <!-- Main Content -->
     <div class="container">
+      <!-- COORDINATOR MODE -->
+      <div id="coordinator-mode">
       <!-- Configuration Panel -->
       <section class="card">
         <h2>Configuration</h2>
@@ -130,9 +148,182 @@
         <div id="launchProgress"></div>
         <div id="tradeHistory" class="trade-history"></div>
       </section>
+      </div>
+      <!-- END COORDINATOR MODE -->
+
+      <!-- MARKET MAKER MODE -->
+      <div id="market-maker-mode" style="display: none;">
+        <!-- MM Configuration -->
+        <section class="card">
+          <h2>Market Maker Configuration</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Trading Capital (USD)</label>
+              <input type="number" id="mm-trading-capital" value="1000" min="100" />
+              <small>Amount to use for market making</small>
+            </div>
+
+            <div class="form-group">
+              <label>Target 24h Volume (USD)</label>
+              <input type="number" id="mm-target-volume" value="2000" min="100" />
+              <small>Daily volume target</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Price Strategy</label>
+              <select id="mm-price-target">
+                <option value="drift-up">Drift Up (gradual increase)</option>
+                <option value="stable">Stable (maintain price)</option>
+                <option value="volatile">Volatile (larger swings)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Max Position Size (USD)</label>
+              <input type="number" id="mm-max-position" value="100" min="10" />
+              <small>Maximum per trade</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Min Time Between Trades (minutes)</label>
+              <input type="number" id="mm-min-time" value="5" min="1" />
+            </div>
+
+            <div class="form-group">
+              <label>Max Time Between Trades (minutes)</label>
+              <input type="number" id="mm-max-time" value="30" min="5" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Stop Loss (%)</label>
+              <input type="number" id="mm-stop-loss" value="30" min="5" max="50" />
+              <small>Stop if down this %</small>
+            </div>
+
+            <div class="form-group">
+              <label>Take Profit (%)</label>
+              <input type="number" id="mm-take-profit" value="10" min="5" max="100" />
+              <small>Alert at this % gain</small>
+            </div>
+          </div>
+
+          <div class="form-group checkbox">
+            <input type="checkbox" id="mm-whale-detection" checked />
+            <label for="mm-whale-detection">Enable Whale Detection</label>
+          </div>
+
+          <div class="form-group checkbox">
+            <input type="checkbox" id="mm-auto-rebalance" checked />
+            <label for="mm-auto-rebalance">Enable Auto Rebalancing</label>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-success" onclick="startMarketMaker()">🤖 Start Market Maker</button>
+            <button class="btn btn-danger" onclick="stopMarketMaker()">🛑 Stop Market Maker</button>
+          </div>
+        </section>
+
+        <!-- P&L Dashboard -->
+        <section class="card">
+          <h2>Performance Dashboard</h2>
+          <div id="mm-dashboard" class="mm-dashboard">
+            <div class="stat-grid">
+              <div class="stat-box">
+                <div class="stat-label">Current Price</div>
+                <div class="stat-value" id="mm-current-price">$0.000000</div>
+                <div class="stat-change" id="mm-price-change">+0.00%</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Total P&L</div>
+                <div class="stat-value" id="mm-total-pnl">$0.00</div>
+                <div class="stat-change" id="mm-roi">0.00% ROI</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Total Volume</div>
+                <div class="stat-value" id="mm-total-volume">$0</div>
+                <div class="stat-change" id="mm-trades-count">0 trades</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Inventory</div>
+                <div class="stat-value" id="mm-inventory-value">$0</div>
+                <div class="stat-change" id="mm-inventory-tokens">0 tokens</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Available Capital</div>
+                <div class="stat-value" id="mm-available-capital">$0</div>
+                <div class="stat-change" id="mm-capital-percent">0%</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Running Time</div>
+                <div class="stat-value" id="mm-running-time">0h</div>
+                <div class="stat-change" id="mm-trades-per-hour">0/hr</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Gas Costs</div>
+                <div class="stat-value" id="mm-gas-cost">$0.00</div>
+                <div class="stat-change" id="mm-organic-trades">0 organic</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Net Profit</div>
+                <div class="stat-value" id="mm-net-profit">$0.00</div>
+                <div class="stat-change" id="mm-net-roi">0.00%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recent Trades -->
+        <section class="card">
+          <h2>Recent Market Making Trades</h2>
+          <div id="mm-trades" class="mm-trades-list"></div>
+        </section>
+
+        <!-- Status Log -->
+        <section class="card">
+          <h2>Market Maker Log</h2>
+          <div id="mm-log" class="status-log"></div>
+        </section>
+      </div>
+      <!-- END MARKET MAKER MODE -->
+
+      <!-- HYBRID MODE -->
+      <div id="hybrid-mode" style="display: none;">
+        <section class="card">
+          <h2>🎯 Hybrid Strategy</h2>
+          <div class="hybrid-info">
+            <h3>Week 1: Launch + Market Making</h3>
+            <ol>
+              <li>Day 1: Run Launch Coordinator (create initial liquidity)</li>
+              <li>Day 1-7: Start Market Maker Bot (build ongoing volume)</li>
+              <li>Monitor for organic traders arriving</li>
+            </ol>
+
+            <h3>Week 2-4: Transition</h3>
+            <ol>
+              <li>Reduce bot activity as organic volume grows</li>
+              <li>Market maker provides liquidity for real trades</li>
+              <li>Gradually exit position</li>
+            </ol>
+
+            <div class="button-group">
+              <button class="btn btn-primary" onclick="switchMode('coordinator')">Start with Launch Coordinator →</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- END HYBRID MODE -->
+
     </div>
   </div>
 
   <script src="renderer.js"></script>
+  <script src="market-maker-ui.js"></script>
 </body>
 </html>
