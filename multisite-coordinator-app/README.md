@@ -2,24 +2,59 @@
 
 Desktop OSX application for managing personal multi-wallet liquidity distribution for the Pizza Connection game token ecosystem.
 
+## Two Powerful Modes
+
+### 🚀 Launch Coordinator
+One-time liquidity event for token launches. Distributes buys across your multiple personal wallets over 6-12 hours with privacy-focused patterns.
+
+**Best for:**
+- Initial token launch
+- Creating day-1 liquidity
+- Bootstrap activity
+
+### 🤖 Market Maker Bot
+Continuous 24/7 automated trading. YOU become both buyer and seller, creating organic-looking volume until real traders arrive.
+
+**Best for:**
+- Building sustained volume
+- Providing ongoing liquidity
+- Attracting organic traders
+
+### ⚡ Hybrid Strategy (Recommended)
+Combine both: Launch Coordinator on Day 1, then Market Maker Bot for weeks 1-4.
+
 ## Purpose
 
-This tool helps you bootstrap initial liquidity for your PCC game token across multiple personal wallets with privacy-focused distribution patterns. It's designed for:
+This tool helps you bootstrap initial liquidity for your PCC game token across multiple personal wallets. It's designed for:
 
 - Creating initial game token liquidity
+- Building sustained trading volume
 - Distributing your holdings across multiple wallets for security
 - Privacy-focused OpSec for wallet management
 - Testing strategies on Mumbai testnet before mainnet deployment
 
 ## Features
 
+### Launch Coordinator Features
 - **Multi-Wallet Management**: Manage 5-20 personal wallets from one interface
 - **Privacy-Focused Distribution**: Randomize timing and amounts for OpSec
 - **Testnet Simulation**: Test strategies 100+ times on Mumbai (free)
-- **Live Monitoring**: Real-time dashboard with trade execution tracking
+- **Privacy Scoring**: 0-10 score, targets 8+ for optimal patterns
 - **Emergency Stop**: Immediate halt of all pending trades
-- **VPN Integration**: Route trades through VPN for additional privacy
-- **Analytics**: Privacy scoring and pattern analysis
+
+### Market Maker Bot Features
+- **24/7 Automated Trading**: Continuous buy/sell execution
+- **Three Strategies**: Drift Up, Stable, or Volatile price targets
+- **Real-Time P&L Dashboard**: Track profit/loss, ROI, volume
+- **Whale Detection**: Responds intelligently to large trades
+- **Auto Rebalancing**: Maintains optimal token/cash ratio
+- **Stop Loss Protection**: Auto-exit at configurable loss threshold
+
+### Shared Features
+- **VPN Integration**: Route trades through VPN for privacy
+- **Live Monitoring**: Real-time dashboard with trade tracking
+- **Testnet First**: Always test on Mumbai before mainnet
+- **Multiple Networks**: Support for Mumbai testnet and Polygon mainnet
 
 ## Installation
 
@@ -44,9 +79,26 @@ cp .env.example .env
 nano .env
 ```
 
+## Quick Mode Comparison
+
+| Feature | Launch Coordinator | Market Maker Bot |
+|---------|-------------------|------------------|
+| **Duration** | One-time (6-12 hours) | Continuous (1-30 days) |
+| **Trades** | 5-20 total | 30-50 per day |
+| **Volume Created** | Initial liquidity | Sustained volume |
+| **Capital Needed** | $500-2,000 | $1,000-5,000 |
+| **Gas Costs** | $10-50 total | $15-100 per day |
+| **Best For** | Launch day | Building liquidity |
+| **Automation** | Scheduled buys | Continuous trading |
+| **P&L Tracking** | No | Yes (full dashboard) |
+
+**Recommended:** Use both! Launch Coordinator for Day 1, Market Maker Bot for ongoing growth.
+
 ## Usage
 
-### 1. Test on Mumbai Testnet (FREE)
+### MODE 1: Launch Coordinator
+
+#### 1. Test on Mumbai Testnet (FREE)
 
 ```bash
 # Run in development mode
@@ -63,7 +115,7 @@ npm run simulate
 4. Run 10-100 simulations to optimize your pattern
 5. Review privacy scores (aim for 8+/10)
 
-### 2. Deploy to Mainnet
+#### 2. Deploy to Mainnet
 
 ```bash
 # Build OSX app
@@ -80,7 +132,67 @@ npm start
 4. Review schedule before executing
 5. Launch!
 
-## Configuration Guide
+### MODE 2: Market Maker Bot
+
+#### 1. Configure Strategy
+
+Switch to "Market Maker Bot" mode and configure:
+
+- **Trading Capital**: $1,000-5,000 (dedicated to trading)
+- **Price Strategy**: Drift Up, Stable, or Volatile
+- **Position Sizes**: $50-150 per trade
+- **Time Between Trades**: 5-30 minutes
+- **Risk Limits**: Stop loss and take profit levels
+
+#### 2. Start Bot
+
+```bash
+# Test on Mumbai first
+Click "Start Market Maker" in GUI
+Monitor P&L dashboard
+
+# After testing, run on Polygon mainnet
+```
+
+#### 3. Monitor Performance
+
+Real-time dashboard shows:
+- Current price and % change
+- Total profit/loss and ROI
+- Trading volume generated
+- Token inventory and cash balance
+- Gas costs and net profit
+- Organic trades detected
+
+#### 4. When to Stop
+
+- Organic volume exceeds bot volume (success!)
+- 30 days completed
+- Price targets achieved
+- Stop loss triggered
+
+**See MARKET_MAKER_GUIDE.md for complete documentation**
+
+### MODE 3: Hybrid Strategy
+
+The most effective approach:
+
+**Week 1:**
+1. Day 1 Morning: Run Launch Coordinator
+2. Day 1 Afternoon: Start Market Maker Bot
+3. Days 2-7: Let Market Maker run 24/7
+
+**Week 2-3:**
+1. Monitor for organic traders
+2. Reduce Market Maker activity gradually
+3. Let organic volume take over
+
+**Week 4+:**
+1. Turn off Market Maker
+2. Organic liquidity sustains itself
+3. Mission accomplished!
+
+## Configuration Guide (Launch Coordinator)
 
 ### Basic Settings
 
@@ -250,6 +362,12 @@ For issues or questions:
 3. Test on Mumbai first
 4. Open an issue in the repository
 
+## Additional Documentation
+
+- **QUICKSTART.md** - 5-minute setup guide
+- **MARKET_MAKER_GUIDE.md** - Complete Market Maker Bot documentation
+- **AUTOMATED_LAUNCH_SYSTEM.md** - Original technical specification
+
 ## Disclaimer
 
 This tool is for managing YOUR OWN personal wallets for YOUR OWN token project. You are responsible for:
@@ -257,6 +375,7 @@ This tool is for managing YOUR OWN personal wallets for YOUR OWN token project. 
 - Security of your private keys
 - Proper use of the tool
 - Gas fees and transaction costs
+- Trading decisions and outcomes
 
 ## License
 
@@ -264,4 +383,4 @@ MIT License - See LICENSE file for details
 
 ---
 
-**Remember**: Always test on Mumbai testnet first. Start small. Review privacy scores. Use VPN. Keep your keys secure.
+**Remember**: Always test on Mumbai testnet first. Start small. Use VPN. Monitor carefully. Keep your keys secure. 🚀

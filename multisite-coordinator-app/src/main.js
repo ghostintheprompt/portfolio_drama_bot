@@ -3,10 +3,12 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 const { PersonalWalletCoordinator } = require('./coordinator');
+const MarketMaker = require('./market-maker');
 
 const store = new Store();
 let mainWindow;
 let coordinator;
+let marketMaker;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -169,4 +171,96 @@ ipcMain.handle('check-wallets', async () => {
   } catch (error) {
     return { success: false, error: error.message };
   }
+});
+
+// Market Maker Handlers
+ipcMain.handle('start-market-maker', async (event, config) => {
+  try {
+    marketMaker = new MarketMaker(config);
+
+    // Forward all events to renderer
+    marketMaker.on('status', (data) => {
+      mainWindow.webContents.send('mm-status', data);
+    });
+
+    marketMaker.on('initialized', (data) => {
+      mainWindow.webContents.send('mm-initialized', data);
+    });
+
+    marketMaker.on('wallets_loaded', (data) => {
+      mainWindow.webContents.send('mm-wallets-loaded', data);
+    });
+
+    marketMaker.on('wallet_balance', (data) => {
+      mainWindow.webContents.send('mm-wallet-balance', data);
+    });
+
+    marketMaker.on('started', (data) => {
+      mainWindow.webContents.send('mm-started', data);
+    });
+
+    marketMaker.on('waiting', (data) => {
+      mainWindow.webContents.send('mm-waiting', data);
+    });
+
+    marketMaker.on('trade_planned', (data) => {
+      mainWindow.webContents.send('mm-trade-planned', data);
+    });
+
+    marketMaker.on('trade_start', (data) => {
+      mainWindow.webContents.send('mm-trade-start', data);
+    });
+
+    marketMaker.on('trade_complete', (data) => {
+      mainWindow.webContents.send('mm-trade-complete', data);
+    });
+
+    marketMaker.on('trade_error', (data) => {
+      mainWindow.webContents.send('mm-trade-error', data);
+    });
+
+    marketMaker.on('stats_updated', (data) => {
+      mainWindow.webContents.send('mm-stats-updated', data);
+    });
+
+    marketMaker.on('organic_trade_detected', (data) => {
+      mainWindow.webContents.send('mm-organic-trade', data);
+    });
+
+    marketMaker.on('stop_loss_triggered', (data) => {
+      mainWindow.webContents.send('mm-stop-loss', data);
+    });
+
+    marketMaker.on('stopping', (data) => {
+      mainWindow.webContents.send('mm-stopping', data);
+    });
+
+    marketMaker.on('stopped', (data) => {
+      mainWindow.webContents.send('mm-stopped', data);
+    });
+
+    // Run market maker
+    marketMaker.run().catch(error => {
+      mainWindow.webContents.send('mm-error', { message: error.message });
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('stop-market-maker', async () => {
+  if (marketMaker) {
+    marketMaker.stop();
+    return { success: true };
+  }
+  return { success: false, error: 'Market maker not running' };
+});
+
+ipcMain.handle('get-mm-stats', async () => {
+  if (marketMaker) {
+    return { success: true, stats: marketMaker.getStats() };
+  }
+  return { success: false, error: 'Market maker not running' };
 });
