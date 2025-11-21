@@ -1,0 +1,32 @@
+{
+  "name": "multisite-coordinator",
+  "version": "1.0.0",
+  "description": "Personal multi-wallet trading coordinator for OSX",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --mac",
+    "test-mumbai": "node src/coordinator.js --network=mumbai --test-mode=true",
+    "simulate": "node src/coordinator.js --network=mumbai --test-mode=true --iterations=100"
+  },
+  "build": {
+    "appId": "com.multisite.coordinator",
+    "productName": "Multisite Coordinator",
+    "mac": {
+      "category": "public.app-category.finance",
+      "target": "dmg",
+      "icon": "public/icon.png"
+    }
+  },
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "dotenv": "^16.0.3",
+    "electron-store": "^8.1.0",
+    "chart.js": "^4.4.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  }
+}

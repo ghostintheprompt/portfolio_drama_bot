@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCC Game Token Liquidity Coordinator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header>
+      <h1>🍕 PCC Game Token Coordinator</h1>
+      <p class="subtitle">Personal Multi-Wallet Liquidity Manager</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Configuration Panel -->
+      <section class="card">
+        <h2>Configuration</h2>
+
+        <div class="form-group">
+          <label>Network</label>
+          <select id="network">
+            <option value="mumbai">Mumbai Testnet (Free Testing)</option>
+            <option value="polygon">Polygon Mainnet (Live)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Token Address</label>
+          <input type="text" id="tokenAddress" placeholder="0x..." />
+        </div>
+
+        <div class="form-group">
+          <label>LP Address</label>
+          <input type="text" id="lpAddress" placeholder="0x..." />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Personal Wallets</label>
+            <input type="number" id="numWallets" value="5" min="2" max="20" />
+          </div>
+
+          <div class="form-group">
+            <label>Total Buy Amount (USD)</label>
+            <input type="number" id="totalBuyAmount" value="500" min="10" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Timing Variance (0-1)</label>
+            <input type="number" id="timingVariance" value="0.5" min="0" max="1" step="0.1" />
+            <small>Higher = more spread out over time</small>
+          </div>
+
+          <div class="form-group">
+            <label>Amount Variance (0-1)</label>
+            <input type="number" id="amountVariance" value="0.5" min="0" max="1" step="0.1" />
+            <small>Higher = more variation in buy amounts</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Launch Time</label>
+          <input type="datetime-local" id="launchTime" />
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="vpnEnabled" />
+          <label for="vpnEnabled">Enable VPN Protection</label>
+        </div>
+
+        <div class="button-group">
+          <button class="btn btn-primary" onclick="saveConfig()">💾 Save Config</button>
+          <button class="btn btn-secondary" onclick="checkWallets()">👛 Check Wallets</button>
+        </div>
+      </section>
+
+      <!-- Action Panel -->
+      <section class="card">
+        <h2>Actions</h2>
+
+        <div class="action-grid">
+          <div class="action-card">
+            <h3>🧪 Test Mode</h3>
+            <p>Run simulations on Mumbai testnet to optimize your distribution pattern.</p>
+            <input type="number" id="iterations" value="10" min="1" max="100" placeholder="Iterations" />
+            <button class="btn btn-success" onclick="runSimulation()">Run Simulations</button>
+          </div>
+
+          <div class="action-card">
+            <h3>🚀 Live Launch</h3>
+            <p>Execute real trades on Polygon mainnet with your configured settings.</p>
+            <button class="btn btn-warning" onclick="startLiveLaunch()">Start Live Launch</button>
+            <button class="btn btn-danger" onclick="emergencyStop()">🛑 Emergency Stop</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wallet Status -->
+      <section class="card">
+        <h2>Wallet Status</h2>
+        <div id="walletList" class="wallet-list">
+          <p class="text-muted">Click "Check Wallets" to view your wallets</p>
+        </div>
+      </section>
+
+      <!-- Status Log -->
+      <section class="card">
+        <h2>Status Log</h2>
+        <div id="statusLog" class="status-log"></div>
+      </section>
+
+      <!-- Results Dashboard -->
+      <section class="card" id="resultsSection" style="display: none;">
+        <h2>Simulation Results</h2>
+        <div id="resultsGrid" class="results-grid"></div>
+        <div id="chartContainer">
+          <canvas id="resultsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Launch Progress -->
+      <section class="card" id="launchSection" style="display: none;">
+        <h2>Launch Progress</h2>
+        <div id="launchProgress"></div>
+        <div id="tradeHistory" class="trade-history"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
