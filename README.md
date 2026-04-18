@@ -36,7 +36,7 @@ Comprehensive privacy layer for automated scrapers and trading nodes.
 *   **Fingerprint Spoofing**: Randomized User-Agents, canvas noise, and hardware profiles.
 *   **Behavioral Masking**: Anti-bot evasion techniques for modern firewalls.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 *   **Frontend**: React 19, Tailwind CSS 4, Framer Motion, Lucide Icons, Recharts.
 *   **Backend**: Node.js (Express), `ethers.js` v6, TSX.
