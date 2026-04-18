@@ -1,0 +1,6 @@
+{
+  "name": "Portfolio Drama Bot (APT Suite)",
+  "description": "An advanced persistent threat (APT) inspired portfolio management and liquidity coordinator suite with C2 architecture, mempool sniffing, and anti-forensics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
