@@ -1,4 +1,4 @@
-# AETERNA DRAMA C2 [APT-41-SUITE]
+# PORTFOLIO DRAMA BOT
 
 A professional-grade, Advanced Persistent Threat (APT)-inspired Command and Control (C2) suite for portfolio management, liquidity coordination, and social influence mapping.
 
