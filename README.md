@@ -1,17 +1,13 @@
+<img src="porfolio_drama_bot.png" width="200">
+
 # PORTFOLIO DRAMA BOT
-
-<div align="center">
-  <img src="porfolio_drama_bot.png" width="256" height="256" alt="Portfolio Drama Bot Icon" />
-</div>
-
-A professional-grade, Advanced Persistent Threat (APT)-inspired Command and Control (C2) suite for portfolio management, liquidity coordination, and social influence mapping.
+A professional-grade, Advanced Persistent Threat (APT)-inspired Command and Control (C2) suite for portfolio management, liquidity coordination, and social influence mapping. — v1.0
 
 ![Status: Operational](https://img.shields.io/badge/Status-Operational-00ff41?style=flat-square)
 ![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue?style=flat-square)
 ![Stack: React + Express](https://img.shields.io/badge/Stack-React_%2B_Express-00d1ff?style=flat-square)
 
-## Overview
-
+## What it does
 AETERNA DRAMA C2 is a resilient orchestration layer designed to manage distributed trading nodes and influence vectors. By leveraging architectural patterns found in sophisticated network operations, this suite provides unparalleled control over market liquidity and social sentiment.
 
 ## Core Systems
