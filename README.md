@@ -1,5 +1,9 @@
 # PORTFOLIO DRAMA BOT
 
+<div align="center">
+  <img src="portfolio_drama_bot.png" width="256" height="256" alt="Portfolio Drama Bot Icon" />
+</div>
+
 A professional-grade, Advanced Persistent Threat (APT)-inspired Command and Control (C2) suite for portfolio management, liquidity coordination, and social influence mapping.
 
 ![Status: Operational](https://img.shields.io/badge/Status-Operational-00ff41?style=flat-square)
