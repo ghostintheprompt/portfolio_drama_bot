@@ -1,4 +1,6 @@
-<img src="porfolio_drama_bot.png" width="200">
+<p align="center">
+  <img src="porfolio_drama_bot.png" width="520">
+</p>
 
 # PORTFOLIO DRAMA BOT
 A professional-grade, Advanced Persistent Threat (APT)-inspired Command and Control (C2) suite for portfolio management, liquidity coordination, and social influence mapping. — v1.0
