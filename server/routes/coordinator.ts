@@ -16,8 +16,11 @@ coordinatorRouter.post('/beacon', (req, res) => {
 
 coordinatorRouter.post('/task', (req, res) => {
   const { nodeId, task } = req.body;
-  coordinator.assignTask(nodeId, task);
-  res.json({ status: 'assigned' });
+  const result = coordinator.assignTask(nodeId, task);
+  if (result.error) {
+    return res.status(403).json(result);
+  }
+  res.json(result);
 });
 
 coordinatorRouter.get('/vpn/status', async (req, res) => {
