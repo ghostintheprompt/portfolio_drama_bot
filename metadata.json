@@ -1,6 +1,45 @@
 {
   "name": "Portfolio Drama Bot (APT Suite)",
   "description": "An advanced persistent threat (APT) inspired portfolio management and liquidity coordinator suite with C2 architecture, mempool sniffing, and anti-forensics.",
+  "version": "2.0.0",
+  "capabilities": [
+    {
+      "id": "s1",
+      "name": "OS-Aware Persistence Payload",
+      "type": "offensive"
+    },
+    {
+      "id": "s2",
+      "name": "Arbitrage Vectoring",
+      "type": "offensive"
+    },
+    {
+      "id": "s3",
+      "name": "Dynamic Liquidity Discovery",
+      "type": "intel"
+    },
+    {
+      "id": "INC-1",
+      "name": "Whale Liquidity Alert",
+      "type": "defensive"
+    },
+    {
+      "id": "POLICY-1",
+      "name": "Execution Sandbox",
+      "type": "policy"
+    },
+    {
+      "id": "POLICY-2",
+      "name": "Behavioral Guardrail (Rate Limit)",
+      "type": "policy"
+    }
+  ],
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "C2_ORCHESTRATION",
+    "MEMPOOL_INTEL",
+    "ANTI_FORENSICS",
+    "WEIGHTED_INFLUENCE_MAPPING",
+    "COVERT_WSS_CHANNELS"
+  ]
 }

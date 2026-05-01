@@ -56,6 +56,7 @@ export default function App() {
   const [logs, setLogs] = useState<{ id: string, msg: string, time: string, type: 'info' | 'warn' | 'success' }[]>([]);
   const [mempool, setMempool] = useState<{ hash: string, value: number, time: string }[]>([]);
   const [isLive, setIsLive] = useState(true);
+  const [wsStatus, setWsStatus] = useState<'connected' | 'disconnected'>('disconnected');
 
   const addLog = useCallback((msg: string, type: 'info' | 'warn' | 'success' = 'info') => {
     setLogs(prev => [
@@ -63,6 +64,42 @@ export default function App() {
       ...prev.slice(0, 49)
     ]);
   }, []);
+
+  // WebSocket Integration
+  useEffect(() => {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const ws = new WebSocket(`${protocol}//${window.location.host}`);
+
+    ws.onopen = () => {
+      setWsStatus('connected');
+      addLog('[WSS] Covert channel established', 'success');
+    };
+
+    ws.onclose = () => {
+      setWsStatus('disconnected');
+      addLog('[WSS] Connection lost', 'warn');
+    };
+
+    ws.onmessage = (event) => {
+      const { type, data } = JSON.parse(event.data);
+      if (type === 'node_update') {
+        setNodes(prev => {
+          const idx = prev.findIndex(n => n.id === data.id);
+          if (idx >= 0) {
+            const newNodes = [...prev];
+            newNodes[idx] = data;
+            return newNodes;
+          }
+          return [...prev, data];
+        });
+        addLog(`[C2] Node update: ${data.id}`, 'info');
+      } else if (type === 'soc_alert') {
+        addLog(`[ALERT] ${data.id}: ${data.description}`, 'warn');
+      }
+    };
+
+    return () => ws.close();
+  }, [addLog]);
 
   const fetchNodes = async () => {
     try {
@@ -103,7 +140,8 @@ export default function App() {
   // Simulate a beacon check-in
   const simulateBeacon = async () => {
     const nodeId = 'NODE-' + Math.floor(Math.random() * 9999);
-    addLog(`[C2] Manual beacon registration triggered for ${nodeId}`, 'info');
+    const os = Math.random() > 0.5 ? 'linux' : 'windows';
+    addLog(`[C2] Manual beacon registration triggered for ${nodeId} (${os})`, 'info');
     try {
       await fetch('/api/coordinator/beacon', {
         method: 'POST',
@@ -111,7 +149,8 @@ export default function App() {
         body: JSON.stringify({
           id: nodeId,
           address: '0x' + Math.random().toString(16).substring(2, 42),
-          capabilities: ['trading', 'sniffing', 'vpn_relay']
+          capabilities: ['trading', 'sniffing', 'vpn_relay'],
+          os: os
         })
       });
       fetchNodes();
@@ -144,7 +183,7 @@ export default function App() {
           </h1>
           <p className="text-gray-500 mt-1 uppercase text-xs flex items-center gap-2">
             <Activity className="w-3 h-3 text-apt-accent animate-pulse" />
-            System Status: Operational | Connection: Secure | Nodes: {nodes.length}
+            System Status: Operational | WSS: <span className={wsStatus === 'connected' ? 'text-apt-accent' : 'text-apt-warn'}>{wsStatus}</span> | Nodes: {nodes.length}
           </p>
         </div>
         <div className="flex gap-4">
@@ -183,7 +222,7 @@ export default function App() {
                       <p className="text-xs italic uppercase">Waiting for beacons...</p>
                    </div>
                 )}
-                {nodes.map((node) => (
+                {nodes.map((node: any) => (
                   <motion.div 
                     key={node.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -191,7 +230,10 @@ export default function App() {
                     className="p-3 border border-apt-grid bg-white/5 flex flex-col gap-1 rounded-sm"
                   >
                     <div className="flex justify-between items-start">
-                      <span className="text-xs font-bold text-apt-accent leading-none">{node.id}</span>
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-apt-accent leading-none">{node.id}</span>
+                        <span className="text-[8px] text-gray-600 uppercase mt-1">Platform: {node.os || 'linux'}</span>
+                      </div>
                       <span className={`text-[9px] uppercase px-1 rounded-sm ${node.status === 'offline' ? 'bg-apt-warn text-white' : 'bg-apt-accent text-black'}`}>
                         {node.status}
                       </span>

@@ -40,19 +40,38 @@ export class VPNManager {
 
   async connect(provider: string = 'nordvpn') {
     console.log(`[VPN] Attempting connection via ${provider}...`);
-    // In a real environment, we'd execute shell commands
-    // For the applet, we simulate the state
-    this.isConnected = true;
-    this.currentIp = '192.168.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255);
-    return { success: true, ip: this.currentIp };
+    try {
+      // Functional restoration: Attempt to verify network state via subprocess
+      // In a real APT scenario, this would call actual VPN CLI binaries
+      // Here we use 'curl' to verify our external identity and simulate the logic flow
+      const { stdout } = await execAsync('curl -s https://ifconfig.me');
+      this.currentIp = stdout.trim();
+      this.isConnected = true;
+      console.log(`[VPN] Connection established. New IP: ${this.currentIp}`);
+      return { success: true, ip: this.currentIp };
+    } catch (error) {
+      console.error(`[VPN] Subprocess execution failed: ${error}`);
+      this.isConnected = false;
+      return { success: false, error: 'Subprocess failure' };
+    }
   }
 
   async getStatus() {
-    return {
-      connected: this.isConnected,
-      ip: this.currentIp,
-      fingerprint: this.getSpoocffedFingerprint()
-    };
+    try {
+      // Actionable verification instead of just returning cached state
+      await execAsync('ping -c 1 8.8.8.8');
+      return {
+        connected: this.isConnected,
+        ip: this.currentIp,
+        fingerprint: this.getSpoocffedFingerprint()
+      };
+    } catch (e) {
+      return {
+        connected: false,
+        ip: '0.0.0.0',
+        error: 'Network unreachable'
+      };
+    }
   }
 }
 

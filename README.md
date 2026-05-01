@@ -85,4 +85,16 @@ Access the dashboard at `http://localhost:3000`. Use the holographic interface t
 This software is for educational and authorized research purposes only. The authors take no responsibility for any unauthorized usage. The patterns implemented (C2, Beaconing, Spoofing) are designed to demonstrate high-level architectural resilience in distributed systems.
 
 ---
-**[MISSION PARAMS: REDACTED]**
+## MISSION PARAMS: RESTORED (V2.0.0 - ADVANCED)
+
+*   **Scenarios (Offensive & Intel)**: 3 (s1, s2, s3)
+    *   `s1`: OS-Aware Persistence (Linux/Windows) via C2.
+    *   `s2`: Real-time Arbitrage Vectoring via Mempool Sniffer.
+    *   `s3`: Autonomous Liquidity Discovery (DEX Factory Monitoring).
+*   **SOC Alerts (Defensive)**: 1 (INC-1)
+    *   `INC-1`: Whale Liquidity detection w/ real-time WSS alerting.
+*   **Guardrails (Policy)**: 2 (POLICY-1, POLICY-2)
+    *   `POLICY-1`: Execution Sandbox (Restricted IP Range Enforcement).
+    *   `POLICY-2`: Behavioral Guardrail (Command Storm Rate-Limiting).
+*   **Analytics**: Weighted Influence Mapping (Dijkstra-based pathfinding).
+*   **Communication**: Jittered WebSockets for covert node beaconing.
